@@ -6,7 +6,7 @@ class App extends Component {
     super(props);
     this.state = {
       allStudents: [],
-      studentList: [],
+      studentList: {},
       isShow: false,
     };
   }
@@ -24,11 +24,12 @@ class App extends Component {
   };
 
   handleDivide = () => {
-    fetch('http:/localhost:8080/studentList', { method: 'GET', mode: 'cors' })
+    fetch('http://localhost:8080/studentList', { method: 'GET', mode: 'cors' })
       .then((res) => {
         return res.json();
       })
       .then((json) => {
+        console.log(json);
         this.setState({
           studentList: json,
           isShow: true,
@@ -42,7 +43,13 @@ class App extends Component {
       <div data-testid="app" className="App">
         <div className="divide-list">
           <h3>分组列表</h3>
-          <button type="button" className="divide-btn" name="divide-btn" value="分组学员">
+          <button
+            type="button"
+            className="divide-btn"
+            name="divide-btn"
+            value="分组学员"
+            onClick={this.handleDivide}
+          >
             分组学员
           </button>
           {this.state.isShow &&
