@@ -8,6 +8,7 @@ class App extends Component {
       allStudents: [],
       studentList: {},
       isShow: false,
+      preNum: 0,
     };
   }
 
@@ -37,8 +38,25 @@ class App extends Component {
       });
   };
 
+  handleShow = (num) => {
+    const { preNum } = this.state;
+    const { students } = this.state.studentList;
+    const items = [];
+    for (let i = 0; i < num; i += 1) {
+      items.push(
+        <div className="item" key={preNum + i}>{`${students[preNum + i].id} ${
+          students[preNum + i].name
+        }`}</div>
+      );
+    }
+    // this.setState({
+    //   preNum: preNum + num,
+    // });
+    return items;
+  };
+
   render() {
-    const { students, formatter } = this.state.studentList;
+    const { formatter } = this.state.studentList;
     return (
       <div data-testid="app" className="App">
         <div className="divide-list">
@@ -55,21 +73,17 @@ class App extends Component {
           {this.state.isShow &&
             formatter.map((num, index) => {
               return (
-                <div>
+                <div key={index}>
                   <div>{`${index + 1} 组`}</div>
-                  <div>
-                    {num.map(() => {
-                      return <div className="item">{`${students.id} ${students.name}`}</div>;
-                    })}
-                  </div>
+                  <div>{this.handleShow(num)}</div>
                 </div>
               );
             })}
         </div>
         <div className="student-list">
           <h3>学员列表</h3>
-          {this.state.allStudents.map((item) => {
-            return <div className="item">{`${item.id} ${item.name}`}</div>;
+          {this.state.allStudents.map((item, index) => {
+            return <div className="item" key={index}>{`${item.id} ${item.name}`}</div>;
           })}
           <button type="button" className="add-btn" name="add-btn" value="+添加学员">
             +添加学员
