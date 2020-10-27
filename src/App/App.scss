@@ -1,2 +1,47 @@
+@import '../style/reboot.scss';
+
 .App {
+  width: 700px;
+  background-color: $bg-gray;
+  margin: 0 auto;
+  .divide-list {
+    width: 680px;
+    height: 80px;
+    margin: 0 auto;
+    h3 {
+      width: 120px;
+      float: left;
+    }
+    .divide-btn {
+      background-color: $primary-color;
+      border: none;
+      float: right;
+      margin-top: 19px;
+    }
+  }
+  .student-list {
+    width: 680px;
+    height: 150px;
+    margin: 0 auto;
+    h3 {
+      width: 120px;
+    }
+    .item {
+      background-color: $light-gray;
+      font-size: 12px;
+      width: 100px;
+      margin: 5px;
+      float: left;
+      text-align: center;
+    }
+    .add-btn {
+      background-color: $light-gray;
+      font-size: 12px;
+      width: 100px;
+      margin: 5px;
+      float: left;
+      text-align: center;
+      border: none;
+    }
+  }
 }
