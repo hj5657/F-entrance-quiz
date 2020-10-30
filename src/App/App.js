@@ -5,6 +5,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // TODO GTB-工程实践: - 变量命名让人疑惑：studentList，allStudents？preNum和isShow没有存在的意义
       allStudents: [],
       studentList: {},
       isShow: false,
@@ -13,6 +14,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    // TODO GTB-工程实践: - 建议把数据请求提取到单独的service
     fetch('http://localhost:8080/students', { method: 'GET', mode: 'cors' })
       .then((res) => {
         return res.json();
@@ -24,6 +26,7 @@ class App extends Component {
       });
   };
 
+  // TODO GTB-工程实践: - 方法命名不清晰
   handleDivide = () => {
     fetch('http://localhost:8080/studentList', { method: 'GET', mode: 'cors' })
       .then((res) => {
@@ -37,7 +40,7 @@ class App extends Component {
         });
       });
   };
-
+  // TODO GTB-知识点: - 后端直接返回分好组的list就可以了，然后使用数组的map方法就可以了，eg: groupedStudents.map(student => StudentItem)
   handleShow = (num) => {
     const { preNum } = this.state;
     const { students } = this.state.studentList;
@@ -49,6 +52,7 @@ class App extends Component {
         }`}</div>
       );
     }
+    // TODO GTB-工程实践: - 不要提交注释代码
     // this.setState({
     //   preNum: preNum + num,
     // });
@@ -74,6 +78,7 @@ class App extends Component {
             formatter.map((num, index) => {
               return (
                 <div key={index}>
+                  {/* TODO GTB-知识点: - 组名应该由后端api返回*/}
                   <div>{`${index + 1} 组`}</div>
                   <div>{this.handleShow(num)}</div>
                 </div>
@@ -95,3 +100,6 @@ class App extends Component {
 }
 
 export default App;
+// TODO GTB-工程实践: * 有小步提交，但提交信息不可读
+// TODO GTB-工程实践: * 数据结构不是很清晰
+// TODO GTB-知识点: - 没有划分组件，学员列表和分组列表很明显可以分成两个组件
